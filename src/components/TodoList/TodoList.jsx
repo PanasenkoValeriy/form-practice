@@ -1,13 +1,21 @@
-export const TodoList = ({todos}) => (
-    <ul>
-        {todos.map(({ id, text, completed }) => (
-            <li key={id}>
-                <input type="checkbox" /> 
-                <p>{text}</p>
-                <button>Delete</button>
-            </li>
+import { Item, List } from './TodoList.styled';
 
-        ))}
-    </ul>
-) 
-
+export const TodoList = ({ todos, onToggleCompleted, onDeleteTodo }) => {
+  return (
+    <List>
+      {todos.map(({ id, text, completed }) => (
+        <Item key={id}>
+          <input
+            checked={completed}
+            type="checkbox"
+            onChange={() => onToggleCompleted(id)}
+          />
+          <p>{text}</p>
+          <button type="button" onClick={() => onDeleteTodo(id)}>
+            Delete
+          </button>
+        </Item>
+      ))}
+    </List>
+  );
+};
